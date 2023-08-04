@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a75cc61bf1ca48a0aa5a3f98e3cede16, type: 3}
+  m_Name: LevelsCollection
+  m_EditorClassIdentifier: 
+  Levels:
+  - SceneName: Level0
+    LevelName: Walk
+    GoldResult: 2000
+    SilverResult: 2500
+    BronzeResult: 3000
+  - SceneName: Level1
+    LevelName: Jump
+    GoldResult: 2000
+    SilverResult: 2200
+    BronzeResult: 3500
+  - SceneName: Level2
+    LevelName: Wall jump
+    GoldResult: 3500
+    SilverResult: 5000
+    BronzeResult: 8000
+  - SceneName: Level3
+    LevelName: Wall climb
+    GoldResult: 3000
+    SilverResult: 3500
+    BronzeResult: 7000
+  - SceneName: Level4
+    LevelName: Shoot
+    GoldResult: 3000
+    SilverResult: 4000
+    BronzeResult: 5000
+  - SceneName: Level5
+    LevelName: Wall shoot
+    GoldResult: 3500
+    SilverResult: 4500
+    BronzeResult: 7000
+  - SceneName: Level6
+    LevelName: Platform
+    GoldResult: 3500
+    SilverResult: 4500
+    BronzeResult: 7000
+  - SceneName: Level7
+    LevelName: Catch them all
+    GoldResult: 6500
+    SilverResult: 9000
+    BronzeResult: 15000
+  - SceneName: Level8
+    LevelName: Tricks in the air
+    GoldResult: 8000
+    SilverResult: 10000
+    BronzeResult: 20000
+  - SceneName: Level9
+    LevelName: The floor is lava
+    GoldResult: 3500
+    SilverResult: 4000
+    BronzeResult: 7000
+  - SceneName: Level10
+    LevelName: Don't catch them all
+    GoldResult: 3500
+    SilverResult: 4500
+    BronzeResult: 8000
+  - SceneName: Level11
+    LevelName: Higher and higher
+    GoldResult: 8828.587800000001
+    SilverResult: 13242.8817
+    BronzeResult: 17657.1756
+  - SceneName: Level12
+    LevelName: Higher and harder
+    GoldResult: 13735.0645
+    SilverResult: 20602.59675
+    BronzeResult: 27470.129
+  - SceneName: Level13
+    LevelName: Level 1
+    GoldResult: 0
+    SilverResult: 0
+    BronzeResult: 0
