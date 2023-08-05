@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Input;
-using PlayerControllers;
+﻿using Input;
 using Sound;
 using UnityEngine;
 
@@ -25,17 +22,6 @@ public class Player : MonoBehaviour
 	[Header("Wall climbing parametrs")] public Vector2 wallJumpClimb;
 	public Vector2 wallLeap;
 	public float wallSlideSpeedMax = 3;
-	
-	[Header("new shit")]
-	[Header("smol")]
-	[SerializeField] private DirectionView _smolDirection;
-	[SerializeField] private float _smolDirectionRadius;
-	[SerializeField] private Smol _smol;
-	
-	[Header("Big boy")]
-	[SerializeField] private DirectionView _bigBoyDirection;
-	[SerializeField] private float _bigBoyDirectionRadius;
-	[SerializeField] private BigBoy _bigBoy;
 
 	private float gravity;
 	private float maxJumpVelocity;
@@ -56,15 +42,10 @@ public class Player : MonoBehaviour
 
 	private float jumpDuration = 0;
 	private BaseInputDriver _inputDriver;
-	
-	private Stack<AbilityType> _currentAbilities = new Stack<AbilityType>();
 
-	public Stack<AbilityType> CurrentAbilities => _currentAbilities;
-
-	public Action OnAbilityChanges;
-	
 	void Start()
 	{
+		Cursor.visible = false;
 		controller = GetComponent<Controller2D>();
 		_inputDriver = GetComponent<NewInputDriver>();
 		
@@ -94,43 +75,6 @@ public class Player : MonoBehaviour
 			else
 			{
 				velocity.y = 0;
-			}
-		}
-
-		UpdateAbilityInput();
-	}
-
-	private void UpdateAbilityInput()
-	{
-		var hasAvailableAbility = _currentAbilities.Count != 0;
-		if (!hasAvailableAbility) return;
-		
-		var nextAbility = _currentAbilities.Peek();
-		var lookPosition = _inputDriver.LookPosition;
-
-		if (_inputDriver.HoldingAbility)
-		{
-			switch (nextAbility)
-			{
-				case AbilityType.Smol:
-					UpdateSmolDirection(lookPosition);
-					break;
-				case AbilityType.BigBoy:
-					UpdateBigBoyDirection(lookPosition);
-					break;
-			}
-		}
-		
-		if (_inputDriver.ReleaseAbility)
-		{
-			switch (nextAbility)
-			{
-				case AbilityType.Smol:
-					ShootSmol(lookPosition);
-					break;
-				case AbilityType.BigBoy:
-					SpawnBigBoy();
-					break;
 			}
 		}
 	}
@@ -279,69 +223,5 @@ public class Player : MonoBehaviour
 		velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing,
 			(controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
 		velocity.y += gravity * Time.deltaTime;
-	}
-	
-	private void UpdateSmolDirection(Vector2 lookPosition)
-	{
-		if (_bigBoyDirection.gameObject.activeSelf)
-		{
-			_bigBoyDirection.gameObject.SetActive(false);
-		}
-		UpdateDirection(lookPosition, _smolDirection.transform, _smolDirectionRadius);
-		
-		_smolDirection.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f,
-			Mathf.Atan2(lookPosition.normalized.y, lookPosition.normalized.x) * Mathf.Rad2Deg - 90));	
-	}
-
-	private void UpdateBigBoyDirection(Vector2 lookPosition)
-	{
-		if (_smolDirection.gameObject.activeSelf)
-		{
-			_smolDirection.gameObject.SetActive(false);
-		}
-		UpdateDirection(lookPosition, _bigBoyDirection.transform, _bigBoyDirectionRadius);
-	}
-	
-	private void UpdateDirection(Vector2 lookPosition, Transform direction, float radius)
-	{
-		if (!(lookPosition.magnitude > 0.001f)) return;
-			
-		direction.position = (Vector2) transform.position + 
-		                     lookPosition.normalized * radius;
-		if (!direction.gameObject.activeSelf)
-		{
-			direction.gameObject.SetActive(true);
-		}
-	}
-
-	private void ShootSmol(Vector2 lookPosition)
-	{
-		if (_smolDirection.gameObject.activeSelf)
-		{
-			_smolDirection.gameObject.SetActive(false);
-		}
-		
-		var smol = Instantiate(_smol, _smolDirection.transform.position, Quaternion.identity);
-		smol.StartShot(lookPosition.normalized);
-		_currentAbilities.Pop();
-		OnAbilityChanges?.Invoke();
-	}
-
-	private void SpawnBigBoy()
-	{
-		if (_bigBoyDirection.gameObject.activeSelf)
-		{
-			_bigBoyDirection.gameObject.SetActive(false);
-		}
-		
-		var bigBoy = Instantiate(_bigBoy, _bigBoyDirection.transform.position, Quaternion.identity);
-		_currentAbilities.Pop();
-		OnAbilityChanges?.Invoke();
-	}
-
-	public void PickUpAbility(AbilityType abilityType)
-	{
-		_currentAbilities.Push(abilityType);
-		OnAbilityChanges?.Invoke();
 	}
 }

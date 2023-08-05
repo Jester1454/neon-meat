@@ -8,6 +8,7 @@ namespace Input
 		private PlayerControls _playerControls;
 		private PlayerInput _playerInput;
 
+		public PlayerInput PlayerInput => _playerInput;
 		public PlayerControls PlayerControls => _playerControls;
 
 		private void Awake()
@@ -39,13 +40,12 @@ namespace Input
 			HoldingJump = _playerControls.Gameplay.Jump.IsPressed();
 			ReleaseJump = _playerControls.Gameplay.Jump.WasReleasedThisFrame();
 
-			HoldingAbility = _playerControls.Gameplay.Smoll.WasPerformedThisFrame() || _playerControls.Gameplay.Smoll.IsPressed();;
-			ReleaseAbility = _playerControls.Gameplay.Smoll.WasReleasedThisFrame();
+			HoldingAbility = _playerControls.Gameplay.Aim.WasPerformedThisFrame() || _playerControls.Gameplay.Aim.IsPressed();;
+			ReleaseAbility = _playerControls.Gameplay.Aim.WasReleasedThisFrame();
 
 			Rerorll = _playerControls.Gameplay.Reroll.WasPerformedThisFrame();
 		}
 		
-				
 		private void UpdateLookPosition()
 		{
 			Vector2 newLookPosition;
@@ -53,7 +53,7 @@ namespace Input
 			if (_playerInput.user.controlScheme?.name == _playerControls.KeyboardMouseScheme.name)
 			{
 				newLookPosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-				newLookPosition -= (Vector2) transform.position;
+				newLookPosition -= (Vector2)Camera.main.transform.position;
 				newLookPosition.Normalize();
 			}
 			else

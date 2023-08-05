@@ -2094,6 +2094,7 @@ GameObject:
   - component: {fileID: 5822979875711003452}
   - component: {fileID: 3496285690283844128}
   - component: {fileID: 3931386804081390109}
+  - component: {fileID: 8058435670952242702}
   m_Layer: 5
   m_Name: WinMenu
   m_TagString: Untagged
@@ -2143,6 +2144,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _firstSelected: {fileID: 1292950364175529482}
+--- !u!114 &8058435670952242702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2413714395888116396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3442ae49ae494b02b050b0dd6eb89fa0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _showOnEnable: 1
+  _hideOnDisable: 0
 --- !u!1 &2607671148094732032
 GameObject:
   m_ObjectHideFlags: 0
@@ -5551,6 +5566,7 @@ GameObject:
   - component: {fileID: 2253164774282702851}
   - component: {fileID: 492163453012843057}
   - component: {fileID: 6957162225462133468}
+  - component: {fileID: 8958449862157009994}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -5618,6 +5634,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8958449862157009994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6784781785576474730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3442ae49ae494b02b050b0dd6eb89fa0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _showOnEnable: 1
+  _hideOnDisable: 1
 --- !u!1 &6785410606076658330
 GameObject:
   m_ObjectHideFlags: 0
@@ -5860,6 +5890,7 @@ GameObject:
   - component: {fileID: 8557173726727373513}
   - component: {fileID: 668044182435906899}
   - component: {fileID: 244595784841974397}
+  - component: {fileID: 4240892314140007226}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -5930,6 +5961,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &4240892314140007226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6987896636972597678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3442ae49ae494b02b050b0dd6eb89fa0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _showOnEnable: 1
+  _hideOnDisable: 0
 --- !u!1 &7079315133300963273
 GameObject:
   m_ObjectHideFlags: 0

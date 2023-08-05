@@ -33,18 +33,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Smoll",
+                    "name": "Aim",
                     "type": "Button",
                     "id": "6797005a-a213-4699-a093-3851d3315ae3",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "BigBoy",
-                    "type": "Button",
-                    "id": "9d17d8ff-96dc-4f8b-9a65-2f2fc009064e",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -250,12 +241,23 @@
                 },
                 {
                     "name": "",
+                    "id": "a9803060-39fa-4d7f-b591-73d20d82444b",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "68c952f7-1e13-4191-bf40-0ae01d7f2147",
                     "path": "<Gamepad>/leftTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Smoll",
+                    "action": "Aim",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -266,29 +268,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyboardMouse",
-                    "action": "Smoll",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "e646f861-b3e5-4d50-955f-8ae3c0a157fd",
-                    "path": "<Gamepad>/rightTrigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "BigBoy",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "6fba3498-4c01-47c6-a2eb-7949fcaf261d",
-                    "path": "<Mouse>/rightButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "KeyboardMouse",
-                    "action": "BigBoy",
+                    "action": "Aim",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

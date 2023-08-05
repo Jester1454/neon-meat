@@ -55,18 +55,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Smoll"",
+                    ""name"": ""Aim"",
                     ""type"": ""Button"",
                     ""id"": ""6797005a-a213-4699-a093-3851d3315ae3"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""BigBoy"",
-                    ""type"": ""Button"",
-                    ""id"": ""9d17d8ff-96dc-4f8b-9a65-2f2fc009064e"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -272,12 +263,23 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""a9803060-39fa-4d7f-b591-73d20d82444b"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""68c952f7-1e13-4191-bf40-0ae01d7f2147"",
                     ""path"": ""<Gamepad>/leftTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""Smoll"",
+                    ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -288,29 +290,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardMouse"",
-                    ""action"": ""Smoll"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""e646f861-b3e5-4d50-955f-8ae3c0a157fd"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""BigBoy"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""6fba3498-4c01-47c6-a2eb-7949fcaf261d"",
-                    ""path"": ""<Mouse>/rightButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""KeyboardMouse"",
-                    ""action"": ""BigBoy"",
+                    ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -369,8 +349,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Gameplay_Movement = m_Gameplay.FindAction("Movement", throwIfNotFound: true);
         m_Gameplay_Jump = m_Gameplay.FindAction("Jump", throwIfNotFound: true);
         m_Gameplay_Pause = m_Gameplay.FindAction("Pause", throwIfNotFound: true);
-        m_Gameplay_Smoll = m_Gameplay.FindAction("Smoll", throwIfNotFound: true);
-        m_Gameplay_BigBoy = m_Gameplay.FindAction("BigBoy", throwIfNotFound: true);
+        m_Gameplay_Aim = m_Gameplay.FindAction("Aim", throwIfNotFound: true);
         m_Gameplay_Reroll = m_Gameplay.FindAction("Reroll", throwIfNotFound: true);
     }
 
@@ -436,8 +415,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Movement;
     private readonly InputAction m_Gameplay_Jump;
     private readonly InputAction m_Gameplay_Pause;
-    private readonly InputAction m_Gameplay_Smoll;
-    private readonly InputAction m_Gameplay_BigBoy;
+    private readonly InputAction m_Gameplay_Aim;
     private readonly InputAction m_Gameplay_Reroll;
     public struct GameplayActions
     {
@@ -446,8 +424,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Movement => m_Wrapper.m_Gameplay_Movement;
         public InputAction @Jump => m_Wrapper.m_Gameplay_Jump;
         public InputAction @Pause => m_Wrapper.m_Gameplay_Pause;
-        public InputAction @Smoll => m_Wrapper.m_Gameplay_Smoll;
-        public InputAction @BigBoy => m_Wrapper.m_Gameplay_BigBoy;
+        public InputAction @Aim => m_Wrapper.m_Gameplay_Aim;
         public InputAction @Reroll => m_Wrapper.m_Gameplay_Reroll;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
@@ -467,12 +444,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
-            @Smoll.started += instance.OnSmoll;
-            @Smoll.performed += instance.OnSmoll;
-            @Smoll.canceled += instance.OnSmoll;
-            @BigBoy.started += instance.OnBigBoy;
-            @BigBoy.performed += instance.OnBigBoy;
-            @BigBoy.canceled += instance.OnBigBoy;
+            @Aim.started += instance.OnAim;
+            @Aim.performed += instance.OnAim;
+            @Aim.canceled += instance.OnAim;
             @Reroll.started += instance.OnReroll;
             @Reroll.performed += instance.OnReroll;
             @Reroll.canceled += instance.OnReroll;
@@ -489,12 +463,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
-            @Smoll.started -= instance.OnSmoll;
-            @Smoll.performed -= instance.OnSmoll;
-            @Smoll.canceled -= instance.OnSmoll;
-            @BigBoy.started -= instance.OnBigBoy;
-            @BigBoy.performed -= instance.OnBigBoy;
-            @BigBoy.canceled -= instance.OnBigBoy;
+            @Aim.started -= instance.OnAim;
+            @Aim.performed -= instance.OnAim;
+            @Aim.canceled -= instance.OnAim;
             @Reroll.started -= instance.OnReroll;
             @Reroll.performed -= instance.OnReroll;
             @Reroll.canceled -= instance.OnReroll;
@@ -538,8 +509,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
-        void OnSmoll(InputAction.CallbackContext context);
-        void OnBigBoy(InputAction.CallbackContext context);
+        void OnAim(InputAction.CallbackContext context);
         void OnReroll(InputAction.CallbackContext context);
     }
 }

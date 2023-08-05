@@ -16,7 +16,7 @@ namespace PlayerControllers
 			if (_isPickedUp) return;
 			if (other == null) return;
 
-			var player = other.GetComponent<Player>();
+			var player = other.GetComponent<AbilityController>();
 
 			if (player != null)
 			{

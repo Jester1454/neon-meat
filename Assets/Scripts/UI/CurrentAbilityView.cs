@@ -13,13 +13,13 @@ namespace UI
 		[SerializeField] private Transform _currentCardParent;
 		[SerializeField] private Transform _otherCardParent;
 		
-		private Player _player;
+		private AbilityController _player;
 		private GameObject _currentCardObject;
 		private List<GameObject> _otherCardsCollections = new List<GameObject>();
 	
 		private void Awake()
 		{
-			_player = FindObjectOfType<Player>();
+			_player = FindObjectOfType<AbilityController>();
 			_player.OnAbilityChanges += OnAbilityChanges;
 		}
 
