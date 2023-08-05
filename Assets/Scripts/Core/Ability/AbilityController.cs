@@ -26,9 +26,14 @@ public class AbilityController : MonoBehaviour
 
 	[Space] 
 	[Header("Double jump")]
-	[SerializeField]
-	private GameObject _doubleJumpView;
+	[SerializeField] private GameObject _doubleJumpView;
 	
+	[Space] 
+	[Header("Dash")]
+	[SerializeField] private GameObject _dashView;
+	[SerializeField] private float _dashForce;
+	[SerializeField] private float _dashDuration;
+
 	private Stack<IAbility> _currentAbilities = new Stack<IAbility>();
 	private IAbility _currentAbility;
 	
@@ -116,6 +121,8 @@ public class AbilityController : MonoBehaviour
 				return new PlatformAbility(transform, _bigBoyDirection, _bigBoy, _bigBoyDirectionRadius);
 			case AbilityType.DoubleJump:
 				return new DoubleJumpAbility(_player, _doubleJumpView);
+			case AbilityType.Dash:
+				return new DashAbility(_player, _dashView, _dashForce, _dashDuration);
 		}
 
 		return null;

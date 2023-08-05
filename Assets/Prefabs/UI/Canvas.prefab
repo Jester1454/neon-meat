@@ -3757,6 +3757,10 @@ MonoBehaviour:
     type: 3}
   _doubleJumpBigCard: {fileID: 8052205908140063234, guid: df4fdc9dce890944380501f057ec5595,
     type: 3}
+  _dashCard: {fileID: 5854620142177533527, guid: c7872d4154751eb429e53c343557faeb,
+    type: 3}
+  _dashBigCard: {fileID: 8052205908140063234, guid: 6b69148f029c1144b8ee138910d16da0,
+    type: 3}
   _currentCardParent: {fileID: 7063989452843295063}
   _otherCardParent: {fileID: 6017098386522629999}
 --- !u!1 &4677260158605596284

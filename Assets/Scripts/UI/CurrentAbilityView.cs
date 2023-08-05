@@ -12,6 +12,8 @@ namespace UI
 		[SerializeField] private GameObject _currentSmolCard;
 		[SerializeField] private GameObject _doubleJumpCard;
 		[SerializeField] private GameObject _doubleJumpBigCard;
+		[SerializeField] private GameObject _dashCard;
+		[SerializeField] private GameObject _dashBigCard;
 		[SerializeField] private Transform _currentCardParent;
 		[SerializeField] private Transform _otherCardParent;
 		
@@ -54,6 +56,9 @@ namespace UI
 					break;
 				case AbilityType.DoubleJump:
 					_currentCardObject = Instantiate(_doubleJumpBigCard, _currentCardParent);
+				break;				
+				case AbilityType.Dash:
+					_currentCardObject = Instantiate(_dashBigCard, _currentCardParent);
 				break;
 			}
 
@@ -69,6 +74,9 @@ namespace UI
 						break;					
 					case AbilityType.DoubleJump:
 						_otherCardsCollections.Add(Instantiate(_doubleJumpCard, _otherCardParent));
+						break;					
+					case AbilityType.Dash:
+						_otherCardsCollections.Add(Instantiate(_dashCard, _otherCardParent));
 						break;
 				}
 			}

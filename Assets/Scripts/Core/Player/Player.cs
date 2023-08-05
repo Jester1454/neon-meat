@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
 	public AudioClip _jumpClip;
 	public AudioClip _onGroundedClip;
 	public ParticleSystem _groundedEffect;
-	
+
 	[Header("Movement parametrs")] public float MoveSpeed = 6;
 	public float accelerationTimeAirborne = .2f;
 	public float accelerationTimeGrounded = .2f;
@@ -23,6 +23,11 @@ public class Player : MonoBehaviour
 	public Vector2 wallLeap;
 	public float wallSlideSpeedMax = 3;
 
+	[Header("Dash")]
+	public ParticleSystem _dashLeftEffect;
+	public ParticleSystem _dashRightEffect;
+	public AudioClip _dashClip;
+	
 	private float gravity;
 	private float maxJumpVelocity;
 	private float maxJumpWidthVelocity;
@@ -39,6 +44,11 @@ public class Player : MonoBehaviour
 	private Vector2 directionalInput;
 	private bool wallSliding;
 	private int wallDirX;
+	
+	private float _currentDashDuration;
+	private float _currentDashForce;
+	private bool _isDashing = false;
+	private Vector2 _dashDirection;
 
 	private float jumpDuration = 0;
 	private BaseInputDriver _inputDriver;
@@ -59,9 +69,8 @@ public class Player : MonoBehaviour
 	void Update()
 	{
 		UpdateInputs();
-
+		DashUpdate();
 		CalculateVelocity();
-
 		HandleWallSliding();
 
 		controller.Move(velocity * Time.deltaTime, directionalInput);
@@ -225,10 +234,47 @@ public class Player : MonoBehaviour
 
 	void CalculateVelocity()
 	{
+		if (_isDashing) return;
+		
 		float targetVelocityX = directionalInput.x * MoveSpeed;
 
 		velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing,
 			(controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
 		velocity.y += gravity * Time.deltaTime;
+	}
+
+	private void DashUpdate()
+	{
+		if (!_isDashing) return;
+		_currentDashDuration -= Time.deltaTime;
+
+		if (_currentDashDuration <= 0)
+		{
+			_isDashing = false;
+		}
+		else
+		{
+			velocity = _dashDirection * _currentDashForce;
+		}
+	}
+
+	public void Dash(float dashDuration, float dashForce)
+	{
+		_currentDashDuration = dashDuration;
+		_currentDashForce = dashForce;
+
+		_dashDirection = directionalInput.magnitude < 0.01f ? (Vector2) velocity : directionalInput;
+		_dashDirection.Normalize();
+		_isDashing = true;
+		SoundManager.Instance.Play(_dashClip);
+
+		if (_dashDirection.x > 0)
+		{
+			_dashLeftEffect.Play();
+		}
+		else
+		{
+			_dashRightEffect.Play();
+		}
 	}
 }
