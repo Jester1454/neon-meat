@@ -194,6 +194,13 @@ public class Player : MonoBehaviour
 		}
 	}
 
+	public void ForceJump()
+	{
+		_coyteTimeCounter = _coyoteTime;
+		_jumpBufferCounter = _jumpBuffer;
+		_groundedEffect.Play();
+	}
+
 	void HandleWallSliding()
 	{
 		wallDirX = (controller.collisions.left) ? -1 : 1;

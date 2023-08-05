@@ -3753,6 +3753,10 @@ MonoBehaviour:
     type: 3}
   _currentSmolCard: {fileID: 8052205908140063234, guid: 3504ef722b064bd4fa3901cd85146dbb,
     type: 3}
+  _doubleJumpCard: {fileID: 5854620142177533527, guid: 38b09110bd5034245807564875a5cbb3,
+    type: 3}
+  _doubleJumpBigCard: {fileID: 8052205908140063234, guid: df4fdc9dce890944380501f057ec5595,
+    type: 3}
   _currentCardParent: {fileID: 7063989452843295063}
   _otherCardParent: {fileID: 6017098386522629999}
 --- !u!1 &4677260158605596284

@@ -4,6 +4,7 @@
 	{
 		None = -1,
 		Smol = 0,
-		BigBoy = 1
+		BigBoy = 1,
+		DoubleJump = 2
 	}
 }

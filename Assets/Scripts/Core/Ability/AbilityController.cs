@@ -23,7 +23,12 @@ public class AbilityController : MonoBehaviour
 	[SerializeField] private DirectionView _bigBoyDirection;
 	[SerializeField] private float _bigBoyDirectionRadius;
 	[SerializeField] private BigBoy _bigBoy;
-		
+
+	[Space] 
+	[Header("Double jump")]
+	[SerializeField]
+	private GameObject _doubleJumpView;
+	
 	private Stack<IAbility> _currentAbilities = new Stack<IAbility>();
 	private IAbility _currentAbility;
 	
@@ -33,9 +38,11 @@ public class AbilityController : MonoBehaviour
 	public Action OnAbilityChanges;
 	private BaseInputDriver _inputDriver;
 	private CommonDirectionAbility _commonDirectionAbility;
+	private Player _player;
 	
 	private void Start()
 	{
+		_player = GetComponent<Player>();
 		_inputDriver = GetComponent<NewInputDriver>();
 		_commonDirectionAbility = new CommonDirectionAbility(transform, _commonDirection, _commonDirectionRadius);
 	}
@@ -107,6 +114,8 @@ public class AbilityController : MonoBehaviour
 				return new ShotAbility(transform, _smolDirection, _smolDirectionRadius, _smol, _homingAngle, _homingDistance);
 			case AbilityType.BigBoy:
 				return new PlatformAbility(transform, _bigBoyDirection, _bigBoy, _bigBoyDirectionRadius);
+			case AbilityType.DoubleJump:
+				return new DoubleJumpAbility(_player, _doubleJumpView);
 		}
 
 		return null;

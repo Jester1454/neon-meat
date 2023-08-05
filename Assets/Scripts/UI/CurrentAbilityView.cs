@@ -10,6 +10,8 @@ namespace UI
 		[SerializeField] private GameObject _currentBigBoyCard;
 		[SerializeField] private GameObject _smolCard;
 		[SerializeField] private GameObject _currentSmolCard;
+		[SerializeField] private GameObject _doubleJumpCard;
+		[SerializeField] private GameObject _doubleJumpBigCard;
 		[SerializeField] private Transform _currentCardParent;
 		[SerializeField] private Transform _otherCardParent;
 		
@@ -50,6 +52,9 @@ namespace UI
 				case AbilityType.BigBoy:
 					_currentCardObject = Instantiate(_currentBigBoyCard, _currentCardParent);
 					break;
+				case AbilityType.DoubleJump:
+					_currentCardObject = Instantiate(_doubleJumpBigCard, _currentCardParent);
+				break;
 			}
 
 			foreach (var abilityType in cardsCollection)
@@ -61,6 +66,9 @@ namespace UI
 						break;
 					case AbilityType.BigBoy:
 						_otherCardsCollections.Add(Instantiate(_bigBoyCard, _otherCardParent));
+						break;					
+					case AbilityType.DoubleJump:
+						_otherCardsCollections.Add(Instantiate(_doubleJumpCard, _otherCardParent));
 						break;
 				}
 			}
