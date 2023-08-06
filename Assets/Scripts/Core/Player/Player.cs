@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
 	public float maxJumpWidth;
 	public float timeToJumpApex = .4f;
 	public float _coyoteTime = .2f;
+	public float _coyoteOnWallTime = .2f;
 	public float _jumpBuffer = .2f;
 	public AudioClip _jumpClip;
 	public AudioClip _onGroundedClip;
@@ -34,7 +35,9 @@ public class Player : MonoBehaviour
 	private float minJumpVelocity;
 	private Vector3 velocity;
 	private float velocityXSmoothing;
+
 	private float _coyteTimeCounter;
+	private float _onWallCoyteTimeCounter;
 	private float _jumpBufferCounter;
 	private bool _isGrounded = false;
 	private bool _isWalled;
@@ -68,10 +71,10 @@ public class Player : MonoBehaviour
 
 	void Update()
 	{
+		HandleWallSliding();
+		CalculateVelocity();
 		UpdateInputs();
 		DashUpdate();
-		CalculateVelocity();
-		HandleWallSliding();
 
 		controller.Move(velocity * Time.deltaTime, directionalInput);
 
@@ -106,6 +109,15 @@ public class Player : MonoBehaviour
 		else
 		{
 			_coyteTimeCounter -= Time.deltaTime;
+		}
+
+		if (_isWalled)
+		{
+			_onWallCoyteTimeCounter = _coyoteOnWallTime;
+		}
+		else
+		{
+			_onWallCoyteTimeCounter -= Time.deltaTime;
 		}
 
 		if (_inputDriver.Jump)
@@ -149,7 +161,8 @@ public class Player : MonoBehaviour
 
 	private void OnJumpInputDown()
 	{
-		if (wallSliding)
+		//sliding
+		if (wallSliding && _onWallCoyteTimeCounter > 0)
 		{
 			SoundManager.Instance.Play(_jumpClip);
 			if (CompareSognOfNumber(wallDirX, directionalInput.x))
@@ -167,32 +180,32 @@ public class Player : MonoBehaviour
 			return;
 		}
 
-		if (_coyteTimeCounter > 0)
+		//jumping
+		if (_coyteTimeCounter <= 0) return;
+
+		maxJumpWidthVelocity = maxJumpWidth / timeToJumpApex;
+		//climb jump
+		if (controller.collisions.slidingDownMaxSlope)
 		{
-			maxJumpWidthVelocity = maxJumpWidth / timeToJumpApex;
-
-			if (controller.collisions.slidingDownMaxSlope)
-			{
-				if (directionalInput.x != -Mathf.Sign(controller.collisions.slopeNormal.x))
-				{
-					SoundManager.Instance.Play(_jumpClip);
-
-					// not jumping against max slope
-					velocity.y = maxJumpVelocity * controller.collisions.slopeNormal.y;
-					//velocity.x = maxJumpVelocity * controller.collisions.slopeNormal.x;
-					velocity.x = _inputDriver.Movement.x * maxJumpWidthVelocity * controller.collisions.slopeNormal.x;
-				}
-			}
-			else
+			if (directionalInput.x != -Mathf.Sign(controller.collisions.slopeNormal.x))
 			{
 				SoundManager.Instance.Play(_jumpClip);
-				velocity.y = maxJumpVelocity;
-				velocity.x = _inputDriver.Movement.x * maxJumpWidthVelocity;
+				// not jumping against max slope
+				velocity.y = maxJumpVelocity * controller.collisions.slopeNormal.y;
+				//velocity.x = maxJumpVelocity * controller.collisions.slopeNormal.x;
+				velocity.x = _inputDriver.Movement.x * maxJumpWidthVelocity * controller.collisions.slopeNormal.x;
 			}
-
-			_coyteTimeCounter = 0;
-			_jumpBufferCounter = 0;
 		}
+		else
+		{
+			//simple jump
+			SoundManager.Instance.Play(_jumpClip);
+			velocity.y = maxJumpVelocity;
+			velocity.x = _inputDriver.Movement.x * maxJumpWidthVelocity;
+		}
+
+		_coyteTimeCounter = 0;
+		_jumpBufferCounter = 0;
 	}
 
 	private void OnJumpInputUp()

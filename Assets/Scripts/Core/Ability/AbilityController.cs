@@ -60,8 +60,10 @@ public class AbilityController : MonoBehaviour
 	private void UpdateAbilityInput()
 	{
 		var hasAvailableAbility = _currentAbilitieTypes.Count != 0;
-		_commonDirectionAbility.Cancel();
+		var lookPosition = _inputDriver.LookPosition;
 
+		_commonDirectionAbility.Update(Time.deltaTime, lookPosition);
+	
 		if (!hasAvailableAbility) return;
 		
 		var nextAbility = _currentAbilities.Peek();
@@ -71,8 +73,6 @@ public class AbilityController : MonoBehaviour
 			_currentAbility?.Cancel();
 			_currentAbility = nextAbility;
 		}
-		
-		var lookPosition = _inputDriver.LookPosition;
 
 		if (_inputDriver.HoldingAbility)
 		{
