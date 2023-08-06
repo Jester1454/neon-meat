@@ -55,8 +55,8 @@ MonoBehaviour:
     BronzeResult: 15000
   - SceneName: Level8
     LevelName: Tricks in the air
-    GoldResult: 8000
-    SilverResult: 10000
+    GoldResult: 9000
+    SilverResult: 13000
     BronzeResult: 20000
   - SceneName: Level9
     LevelName: The floor is lava
@@ -70,16 +70,16 @@ MonoBehaviour:
     BronzeResult: 8000
   - SceneName: Level11
     LevelName: Higher and higher
-    GoldResult: 8828.587800000001
-    SilverResult: 13242.8817
-    BronzeResult: 17657.1756
+    GoldResult: 9500
+    SilverResult: 13000
+    BronzeResult: 20000
   - SceneName: Level12
     LevelName: Higher and harder
-    GoldResult: 13735.0645
-    SilverResult: 20602.59675
-    BronzeResult: 27470.129
+    GoldResult: 10500
+    SilverResult: 13500
+    BronzeResult: 25000
   - SceneName: Level13
     LevelName: Level 1
-    GoldResult: 0
-    SilverResult: 0
-    BronzeResult: 0
+    GoldResult: 5500
+    SilverResult: 8000
+    BronzeResult: 13000
