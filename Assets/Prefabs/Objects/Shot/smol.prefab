@@ -32,7 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6084621397551280317
 SpriteRenderer:
@@ -136,7 +136,7 @@ MonoBehaviour:
   - {x: 0.5, y: -0.28866673, z: 0}
   m_ShapePathHash: 1111592365
   m_Mesh: {fileID: 0}
-  m_InstanceId: -268646
+  m_InstanceId: 45158
   m_LocalBounds:
     m_Center: {x: 0, y: 0.14282647, z: 0}
     m_Extent: {x: 0.5, y: 0.4314932, z: 0}

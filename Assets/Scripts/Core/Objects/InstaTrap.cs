@@ -31,7 +31,7 @@ namespace PlayerControllers
 			var vfx = Instantiate(_vfx, position, Quaternion.identity);
 
 			yield return new WaitForSeconds(_vfxDelay);
-			Destroy(vfx);
+			Destroy(vfx, 0.5f);
 			SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 		}
 	}

@@ -12,6 +12,7 @@ namespace PlayerControllers
 		[SerializeField] private float _spawnCooldown;
 		[SerializeField] private bool _useSpawnLimit;
 		[SerializeField] private int _spawnCount;
+		[SerializeField] private Color _debugColor;
 		
 		private GameObject _currentAbility;
 		private int _spawnedCount = 0;
@@ -54,7 +55,7 @@ namespace PlayerControllers
 
 		private void OnDrawGizmos()
 		{
-			Gizmos.color = Color.blue;
+			Gizmos.color = _debugColor;
 			Gizmos.DrawWireCube(transform.position, Vector3.one);
 		}
 	}

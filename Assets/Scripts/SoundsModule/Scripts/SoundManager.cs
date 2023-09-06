@@ -34,7 +34,6 @@ namespace Sound
 				return _instance;
 			}
 		}
-		
 
 		private void Awake()
 		{
@@ -71,6 +70,20 @@ namespace Sound
 			if (clip == null) return;
 			
 			_soundSource.PlayOneShot(clip);
+		}
+
+		public void PlayLoop(AudioClip clip)
+		{
+			if (clip == null) return;
+			_soundSource.clip = clip;
+			_soundSource.loop = true;
+			_soundSource.Play();
+		}
+
+		public void StopLoop()
+		{
+			_soundSource.loop = false;
+			_soundSource.Stop();
 		}
 
 		public void StopMusic()

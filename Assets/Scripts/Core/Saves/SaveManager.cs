@@ -206,5 +206,21 @@ namespace Core
 
 			return false;
 		}
+
+		public bool AllLevelPassed()
+		{
+			var result = true;
+			for (var i = 0; i < _saveState.LevelSaveDatas.Count; i++)
+			{
+				var levelSaveData = _saveState.LevelSaveDatas[i];
+
+				if (levelSaveData.State != LevelState.Passed)
+				{
+					result = false;
+					break;
+				}
+			}
+			return result;
+		}
 	}
 }

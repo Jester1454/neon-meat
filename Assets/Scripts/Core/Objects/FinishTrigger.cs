@@ -61,6 +61,7 @@ namespace Core.Objects
 			{
 				_isFinished = true;
 				FindObjectOfType<FinishLevelMenu>().FinishLevel(_timeElapsed);
+				player.IsFinished = true;
 				Destroy(gameObject);
 			}
 		}

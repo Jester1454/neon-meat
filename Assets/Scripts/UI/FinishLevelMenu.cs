@@ -97,20 +97,33 @@ namespace UI
 
 		private void ShowFinalWindow()
 		{
-			if (!SaveManager.Instance.LoadNextLevel())
+			if (SaveManager.Instance.LoadNextLevel())
 			{
-				SoundManager.Instance.Play(_finishJingle);
-				_finishScreen.SetActive(true);
-				_windowParent.SetActive(false);
-				var saveState = SaveManager.Instance.SaveState;
-				double totalTime = 0;
-				foreach (var level in saveState.LevelSaveDatas)
-				{
-					totalTime += level.BestResult;
-				}
-				
-				_totalTime.text = $"Total time: {TimeSpan.FromMilliseconds(totalTime).ToMyFormat()}";
+				return;
 			}
+			if (PlayerPrefs.GetInt("finish", 0) == 1)
+			{
+				SceneManager.LoadScene(1);
+				return;
+			}
+			if (!SaveManager.Instance.AllLevelPassed())
+			{
+				SceneManager.LoadScene(1);
+				return;
+			}
+			
+			SoundManager.Instance.Play(_finishJingle);
+			_finishScreen.SetActive(true);
+			_windowParent.SetActive(false);
+			var saveState = SaveManager.Instance.SaveState;
+			double totalTime = 0;
+			foreach (var level in saveState.LevelSaveDatas)
+			{
+				totalTime += level.BestResult;
+			}
+				
+			_totalTime.text = $"Total time: {TimeSpan.FromMilliseconds(totalTime).ToMyFormat()}";
+			PlayerPrefs.SetInt("finish", 1);
 		}		
 
 		private IEnumerator WaitToSkip()

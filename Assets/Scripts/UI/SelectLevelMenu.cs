@@ -11,6 +11,9 @@ namespace Sound
 	{
 		[SerializeField] private Transform _parent;
 		[SerializeField] private LevelItemView _levelItemView;
+		[SerializeField] private GameObject _spaceObject;
+		[SerializeField] private int _spaceIndex;
+		[SerializeField] private int _spaceObjectCount;
 		[SerializeField] private Text _percent;
 		[SerializeField] private Text _totalTime;
 
@@ -25,11 +28,19 @@ namespace Sound
 
 			for (var i = 0; i < levelCollection.Levels.Count; i++)
 			{
+				if (i == _spaceIndex)
+				{
+					for (int j = 0; j < _spaceObjectCount; j++)
+					{
+						Instantiate(_spaceObject, _parent);
+					}
+				}
+				
 				var levelSaveData = saveState.LevelSaveDatas[i];
 				var levelData = levelCollection.Levels[i];
 				
 				var levelItemView = Instantiate(_levelItemView, _parent);
-				levelItemView.Init(levelSaveData, levelData);
+				levelItemView.Init(levelSaveData, levelData, i >= _spaceIndex);
 				passedPercent += (int) levelSaveData.GetLevelResult(levelData) * 0.25f + 0.25f;
 				totalTime += levelSaveData.BestResult;
 				

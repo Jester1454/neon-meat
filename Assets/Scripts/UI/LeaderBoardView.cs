@@ -1,4 +1,5 @@
 ﻿using LeaderBoards;
+using Unity.Services.Authentication;
 using Unity.Services.Leaderboards.Models;
 using UnityEngine;
 
@@ -26,7 +27,7 @@ namespace UI
 			foreach (var result in scores.Results)
 			{
 				var entryView = Instantiate(_entryView, _parent);
-				entryView.Init(result, result.PlayerId.Equals(player.PlayerId));
+				entryView.Init(result, result.PlayerId.Equals(AuthenticationService.Instance.PlayerId));
 			}
 		}
 	}

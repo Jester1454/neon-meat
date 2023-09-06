@@ -6,6 +6,7 @@
 		Smol = 0,
 		BigBoy = 1,
 		DoubleJump = 2,
-		Dash = 3
+		Dash = 3,
+		Laser = 4
 	}
 }

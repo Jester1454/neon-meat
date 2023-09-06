@@ -6,7 +6,7 @@
     "com.unity.inputsystem": "1.6.3",
     "com.unity.recorder": "4.0.1",
     "com.unity.render-pipelines.universal": "14.0.8",
-    "com.unity.services.leaderboards": "file:C:/Users/Jester/Downloads/com.unity.services.leaderboards-1.0.0-exp.1.tgz",
+    "com.unity.services.leaderboards": "1.0.0",
     "com.unity.toolchain.win-x86_64-linux-x86_64": "2.0.5",
     "com.unity.ugui": "1.0.0",
     "com.unity.modules.ai": "1.0.0",

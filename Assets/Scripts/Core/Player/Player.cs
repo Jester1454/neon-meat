@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
 	public AudioClip _jumpClip;
 	public AudioClip _onGroundedClip;
 	public ParticleSystem _groundedEffect;
-
+	
 	[Header("Movement parametrs")] public float MoveSpeed = 6;
 	public float accelerationTimeAirborne = .2f;
 	public float accelerationTimeGrounded = .2f;
@@ -25,8 +25,7 @@ public class Player : MonoBehaviour
 	public float wallSlideSpeedMax = 3;
 
 	[Header("Dash")]
-	public ParticleSystem _dashLeftEffect;
-	public ParticleSystem _dashRightEffect;
+	public ParticleSystem _dashEffect;
 	public AudioClip _dashClip;
 	
 	private float gravity;
@@ -55,6 +54,8 @@ public class Player : MonoBehaviour
 
 	private float jumpDuration = 0;
 	private BaseInputDriver _inputDriver;
+	
+	public bool IsFinished { get; set; }
 
 	void Start()
 	{
@@ -71,6 +72,8 @@ public class Player : MonoBehaviour
 
 	void Update()
 	{
+		if (IsFinished) return;
+		
 		HandleWallSliding();
 		CalculateVelocity();
 		UpdateInputs();
@@ -253,6 +256,7 @@ public class Player : MonoBehaviour
 
 		velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing,
 			(controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
+		
 		velocity.y += gravity * Time.deltaTime;
 	}
 
@@ -271,23 +275,18 @@ public class Player : MonoBehaviour
 		}
 	}
 
-	public void Dash(float dashDuration, float dashForce)
+	public void Dash(float dashDuration, float dashForce, Vector2 direction)
 	{
 		_currentDashDuration = dashDuration;
 		_currentDashForce = dashForce;
 
-		_dashDirection = directionalInput.magnitude < 0.01f ? (Vector2) velocity : directionalInput;
+		_dashDirection = direction; //directionalInput.magnitude < 0.01f ? (Vector2) velocity : directionalInput;
 		_dashDirection.Normalize();
 		_isDashing = true;
 		SoundManager.Instance.Play(_dashClip);
-
-		if (_dashDirection.x > 0)
-		{
-			_dashLeftEffect.Play();
-		}
-		else
-		{
-			_dashRightEffect.Play();
-		}
+		
+		_dashEffect.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f,
+			Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg));
+		_dashEffect.Play();
 	}
 }

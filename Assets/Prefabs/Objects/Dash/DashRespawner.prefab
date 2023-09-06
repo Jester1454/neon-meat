@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7698821504052643898}
   - component: {fileID: 3782202005779359148}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: DashRespawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,3 +51,4 @@ MonoBehaviour:
   _spawnCooldown: 2
   _useSpawnLimit: 0
   _spawnCount: 0
+  _debugColor: {r: 0.21176471, g: 0.6784314, b: 0.33333334, a: 1}

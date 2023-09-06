@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Input;
 using PlayerControllers;
+using Sound;
 using UnityEngine;
 
 public class AbilityController : MonoBehaviour
@@ -30,10 +31,18 @@ public class AbilityController : MonoBehaviour
 	
 	[Space] 
 	[Header("Dash")]
-	[SerializeField] private GameObject _dashView;
+	[SerializeField] private DirectionView _dashView;
 	[SerializeField] private float _dashForce;
 	[SerializeField] private float _dashDuration;
-
+	[SerializeField] private float _dashDirectionRadius;
+	
+	[Space]
+	[Header("laser")]
+	[SerializeField] private DirectionView _laserView;
+	[SerializeField] private float _laserRadius;
+	[SerializeField] private float _laserDuration;
+	[SerializeField] private AudioClip _laserLoop;
+	
 	private Stack<IAbility> _currentAbilities = new Stack<IAbility>();
 	private IAbility _currentAbility;
 	
@@ -49,7 +58,7 @@ public class AbilityController : MonoBehaviour
 	{
 		_player = GetComponent<Player>();
 		_inputDriver = GetComponent<NewInputDriver>();
-		_commonDirectionAbility = new CommonDirectionAbility(transform, _commonDirection, _commonDirectionRadius);
+		_commonDirectionAbility = new CommonDirectionAbility(transform, _commonDirection, _commonDirectionRadius, (NewInputDriver) _inputDriver);
 	}
 
 	public void Update()
@@ -98,6 +107,13 @@ public class AbilityController : MonoBehaviour
 		OnAbilityChanges?.Invoke();
 	}
 
+	public void UseCurrentAbility()
+	{
+		var nextAbility = _currentAbilities.Peek();
+		var lookPosition = _inputDriver.LookPosition;
+		UseAbility(nextAbility, lookPosition);
+	}
+
 	public void PickUpAbility(AbilityType abilityType)
 	{
 		var newAbility = CreateAbility(abilityType);
@@ -122,9 +138,16 @@ public class AbilityController : MonoBehaviour
 			case AbilityType.DoubleJump:
 				return new DoubleJumpAbility(_player, _doubleJumpView);
 			case AbilityType.Dash:
-				return new DashAbility(_player, _dashView, _dashForce, _dashDuration);
+				return new DashAbility(_player, _dashView, _dashForce, _dashDuration, _dashDirectionRadius);			
+			case AbilityType.Laser:
+				return new LaserAbility(transform, _laserView, _laserRadius, _laserDuration, this, _laserLoop);
 		}
 
 		return null;
+	}
+
+	private void OnDestroy()
+	{
+		SoundManager.Instance.StopLoop();
 	}
 }

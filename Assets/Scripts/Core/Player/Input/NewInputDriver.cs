@@ -53,8 +53,8 @@ namespace Input
 			if (_playerInput.user.controlScheme?.name == _playerControls.KeyboardMouseScheme.name)
 			{
 				newLookPosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-				newLookPosition -= (Vector2)Camera.main.transform.position;
-				newLookPosition.Normalize();
+				newLookPosition -= (Vector2) Camera.main.transform.position;
+				//newLookPosition.Normalize();
 			}
 			else
 			{

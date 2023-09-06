@@ -49,3 +49,6 @@ MonoBehaviour:
   _spawnObject: {fileID: 3139061345413972357, guid: 5628b9c12d7e746468195ff8d21b8544,
     type: 3}
   _spawnCooldown: 2
+  _useSpawnLimit: 0
+  _spawnCount: 0
+  _debugColor: {r: 0.21176472, g: 0.6784314, b: 0.6784314, a: 1}

@@ -13,13 +13,14 @@ namespace Sound
 		[SerializeField] private Text _name;
 		[SerializeField] private Text _time;
 		[SerializeField] private Button _button;
+		[SerializeField] private Color _chapterTwoColor;
 		[Space]
 		[SerializeField] private GameObject _bronzeMedal;
 		[SerializeField] private GameObject _silverMedal;
 		[SerializeField] private GameObject _goldenMedal;
 		private LevelSaveData _data;
 		
-		public void Init(LevelSaveData saveData, LevelData levelData)
+		public void Init(LevelSaveData saveData, LevelData levelData, bool isChapterTwo)
 		{
 			_data = saveData;
 			_lockObject.SetActive(saveData.State == LevelState.Locked || saveData.State == LevelState.None);
@@ -33,6 +34,12 @@ namespace Sound
 			_bronzeMedal.SetActive(resultType == LevelResultType.Bronze);
 			_silverMedal.SetActive(resultType == LevelResultType.Silver);
 			_goldenMedal.SetActive(resultType == LevelResultType.Golden);
+			if (isChapterTwo)
+			{
+				var buttonColors = _button.colors;
+				buttonColors.normalColor = _chapterTwoColor;
+				_button.colors = buttonColors;
+			} 
 		}
 
 		private void Onclick()

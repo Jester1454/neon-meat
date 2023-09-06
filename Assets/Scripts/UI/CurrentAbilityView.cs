@@ -13,7 +13,9 @@ namespace UI
 		[SerializeField] private GameObject _doubleJumpCard;
 		[SerializeField] private GameObject _doubleJumpBigCard;
 		[SerializeField] private GameObject _dashCard;
-		[SerializeField] private GameObject _dashBigCard;
+		[SerializeField] private GameObject _dashBigCard;		
+		[SerializeField] private GameObject _laserCard;
+		[SerializeField] private GameObject _laserBigCard;
 		[SerializeField] private Transform _currentCardParent;
 		[SerializeField] private Transform _otherCardParent;
 		
@@ -58,7 +60,10 @@ namespace UI
 					_currentCardObject = Instantiate(_doubleJumpBigCard, _currentCardParent);
 				break;				
 				case AbilityType.Dash:
-					_currentCardObject = Instantiate(_dashBigCard, _currentCardParent);
+					_currentCardObject = Instantiate(_dashBigCard, _currentCardParent);	
+					break;
+				case AbilityType.Laser:
+					_currentCardObject = Instantiate(_laserBigCard, _currentCardParent);
 				break;
 			}
 
@@ -76,7 +81,10 @@ namespace UI
 						_otherCardsCollections.Add(Instantiate(_doubleJumpCard, _otherCardParent));
 						break;					
 					case AbilityType.Dash:
-						_otherCardsCollections.Add(Instantiate(_dashCard, _otherCardParent));
+						_otherCardsCollections.Add(Instantiate(_dashCard, _otherCardParent));	
+						break;
+					case AbilityType.Laser:
+						_otherCardsCollections.Add(Instantiate(_laserCard, _otherCardParent));
 						break;
 				}
 			}
